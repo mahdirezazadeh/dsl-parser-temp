@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.flickit.dsl.editor</groupId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<artifactId>org.flickit.dsl.editor.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -25,7 +25,7 @@
 		<module>org.flickit.dsl.editor.ide</module>
 		<module>org.flickit.dsl.editor.ui</module>
 		<module>org.flickit.dsl.editor.target</module>
-		<module>org.flickit.dsl.editor.tests</module>
+		<!-- <module>org.flickit.dsl.editor.tests</module> -->
 		<module>org.flickit.dsl.editor.ui.tests</module>
 	</modules>
 	<dependencyManagement>
@@ -47,6 +47,14 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+		      <groupId>org.eclipse.tycho</groupId>
+		      <artifactId>tycho-packaging-plugin</artifactId>
+		      <version>${tycho-version}</version>
+		      <configuration>
+		        <strictVersions>false</strictVersions>
+		      </configuration>
+    		</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
