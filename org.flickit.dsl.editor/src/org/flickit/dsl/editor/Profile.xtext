@@ -1,0 +1,69 @@
+grammar org.flickit.dsl.editor.Profile with org.eclipse.xtext.common.Terminals
+
+generate profile "http://www.flickit.org/dsl/editor/Profile"
+
+AssessmentProfile:
+	includes+=Include*
+    (elements+=BaseInfo)*;
+    
+Include:
+	'import' importURI=STRING;
+ 
+BaseInfo:
+	Profile | Subject | Questionnaire | QualityAttribute | Metric;	
+
+Profile:
+    'Profile' name=ID;
+
+Subject:
+    'Subject' name=ID '{'
+       (features+=(ProfileFeature|QuestionnairesFeature|StringValue|IntValue))*
+    '}';
+    
+Questionnaire:
+    'Questionnaire' name=ID '{'
+       (features+=(ProfileFeature|StringValue|IntValue))*
+    '}';
+    
+QualityAttribute:
+    'QualityAttribute' name=ID '{'
+       (features+=(SubjectFeature|StringValue|IntValue))*
+    '}';
+    
+Metric:
+    'Metric' name=ID '{'
+       (features+=(QuestionnaireFeature|ImpactLevel1|ImpactLevel2|ImpactLevel3|MetricSimpleFeature|IntValue|Answer))*
+    '}';
+    
+ImpactLevel1:
+	name=('impact') 'WEAK' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
+
+ImpactLevel2:
+	name=('impact') 'RISKY' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
+	
+ImpactLevel3:
+	name=('impact') 'NORMAL' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
+
+Answer:
+	name=('answers') ':'  featureValue+=STRING(','featureValue+=STRING)*;
+    
+ProfileFeature:
+    name=('profile') ':' featureValue+=[Profile];
+    
+SubjectFeature:
+    name=('subject') ':' featureValue+=[Subject];
+    
+QuestionnaireFeature:
+    name=('questionnaire') ':' featureValue+=[Questionnaire];
+    
+QuestionnairesFeature:
+	name=('questionnaires') ':' featureValue+=[Questionnaire](','featureValue+=[Questionnaire])*;
+	
+MetricSimpleFeature:
+	name=('question') ':' featureValue = STRING;	
+
+StringValue:
+	name=('code' | 'title' | 'description') ':' featureValue = STRING;
+	
+IntValue:
+	name=('index') ':' featureValue = INT;

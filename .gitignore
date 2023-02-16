@@ -1,0 +1,36 @@
+!/.gitignore
+!/.gitkeep
+!.github
+bin/
+target/
+build/
+.gradle/
+generated/
+generated-sources/
+src-gen/
+xtend-gen/
+.DS_Store
+*.xml_gen
+
+# Xtext generated files
+.idea/
+.project
+.classpath
+.settings/
+.metamodel/
+src-gen/
+xtend-gen/
+model/
+
+# Maven files
+target/
+pom.xml.*
+.mvn/
+mvnw
+mvnw.cmd
+
+# Eclipse files
+*.log
+*.tmp
+*.bak
+*.swp
