@@ -10,60 +10,57 @@ Include:
 	'import' importURI=STRING;
  
 BaseInfo:
-	Profile | Subject | Questionnaire | QualityAttribute | Metric;	
-
+    Profile | Subject | Questionnaire | QualityAttribute | Metric;
+	
 Profile:
     'Profile' name=ID;
 
 Subject:
     'Subject' name=ID '{'
-       (features+=(ProfileFeature|QuestionnairesFeature|StringValue|IntValue))*
+    ('code:' code=STRING)
+    ('title:' title=STRING)
+    ('description:' description=STRING)
+    ('index:' index=INT)?
+    ('questionnaires:' questionnaires=[Questionnaire] (',' questionnaires=[Questionnaire])*)?
     '}';
-    
+
 Questionnaire:
     'Questionnaire' name=ID '{'
-       (features+=(ProfileFeature|StringValue|IntValue))*
+    ('code:' code=STRING)
+    ('title:' title=STRING)
+    ('description:' description=STRING)
+    ('index:' index=INT)?
     '}';
-    
+
 QualityAttribute:
     'QualityAttribute' name=ID '{'
-       (features+=(SubjectFeature|StringValue|IntValue))*
+    ('code:' code=STRING)
+    ('title:' title=STRING)
+    ('description:' description=STRING)
+    ('index:' index=INT)?
+    'subject:' subject=[Subject]
     '}';
     
+    
+   
+Level:
+    'WEAK' | 'RISKY' | 'NORMAL' | 'GOOD' | 'OPTIMIZED';
+    
+
+AffectsLevel:
+    'affects' level=Level 'level' 'of' qualityAttribute+=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')?;
+    
+
+FLOAT:
+	INT '.' INT;
+
 Metric:
     'Metric' name=ID '{'
-       (features+=(QuestionnaireFeature|ImpactLevel1|ImpactLevel2|ImpactLevel3|MetricSimpleFeature|IntValue|Answer))*
+    'questionnaire:' questionnaire=[Questionnaire]
+    ('description:' description=STRING)?
+    'question:' question=STRING
+    'options:' options+=STRING (',' options+=STRING)*
+    (affects+=AffectsLevel)*
+    ('options' optionFrom=INT 'to' optionTo=INT 'affects' 'on' level=Level 'level' 'of' qualityAttribute+=[QualityAttribute] ('with values' '{' values+=FLOAT (',' values+=FLOAT)* '}')*)*
+    ('option' INT 'is necessary for'  level=Level 'level' 'of' qualityAttribute+=[QualityAttribute])*
     '}';
-    
-ImpactLevel1:
-	name=('impact') 'WEAK' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
-
-ImpactLevel2:
-	name=('impact') 'RISKY' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
-	
-ImpactLevel3:
-	name=('impact') 'NORMAL' ':'  featureValue+=[QualityAttribute](','featureValue+=[QualityAttribute])*;
-
-Answer:
-	name=('answers') ':'  featureValue+=STRING(','featureValue+=STRING)*;
-    
-ProfileFeature:
-    name=('profile') ':' featureValue+=[Profile];
-    
-SubjectFeature:
-    name=('subject') ':' featureValue+=[Subject];
-    
-QuestionnaireFeature:
-    name=('questionnaire') ':' featureValue+=[Questionnaire];
-    
-QuestionnairesFeature:
-	name=('questionnaires') ':' featureValue+=[Questionnaire](','featureValue+=[Questionnaire])*;
-	
-MetricSimpleFeature:
-	name=('question') ':' featureValue = STRING;	
-
-StringValue:
-	name=('code' | 'title' | 'description') ':' featureValue = STRING;
-	
-IntValue:
-	name=('index') ':' featureValue = INT;
