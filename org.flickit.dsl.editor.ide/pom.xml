@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.flickit.dsl.editor</groupId>
 		<artifactId>org.flickit.dsl.editor.parent</artifactId>
-		<version>1.0.0</version>
+		<version>0.1.0</version>
 	</parent>
 	<artifactId>org.flickit.dsl.editor.ide</artifactId>
 	<packaging>eclipse-plugin</packaging>

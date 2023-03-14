@@ -21,7 +21,7 @@ Subject:
     ('title:' title=STRING)
     ('description:' description=STRING)
     ('index:' index=INT)?
-    ('questionnaires:' questionnaires=[Questionnaire] (',' questionnaires=[Questionnaire])*)?
+    ('questionnaires:' questionnaires+=[Questionnaire] (',' questionnaires+=[Questionnaire])*)?
     '}';
 
 Questionnaire:
