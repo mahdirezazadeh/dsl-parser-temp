@@ -19,7 +19,6 @@ Profile:
 
 Subject:
     'Subject' name=ID '{'
-    ('code:' code=STRING)
     ('title:' title=STRING)
     ('description:' description=STRING)
     ('index:' index=INT)?
@@ -28,7 +27,6 @@ Subject:
 
 Questionnaire:
     'Questionnaire' name=ID '{'
-    ('code:' code=STRING)
     ('title:' title=STRING)
     ('description:' description=STRING)
     ('index:' index=INT)?
@@ -36,7 +34,6 @@ Questionnaire:
 
 QualityAttribute:
     'QualityAttribute' name=ID '{'
-    ('code:' code=STRING)
     ('title:' title=STRING)
     ('description:' description=STRING)
     ('index:' index=INT)?
@@ -46,7 +43,7 @@ QualityAttribute:
     
    
 Level:
-    'WEAK' | 'RISKY' | 'NORMAL' | 'GOOD' | 'OPTIMIZED';
+    'WEAK' | 'MODERATE' | 'GOOD' | 'GREAT' | 'OPTIMIZED';
     
 
 AffectsLevel:
