@@ -43,7 +43,7 @@ QualityAttribute:
     
    
 Level:
-    'WEAK' | 'MODERATE' | 'GOOD' | 'GREAT' | 'OPTIMIZED';
+    'WEAK' | 'MODERATE' | 'GOOD' | 'GREAT' | 'EXCEPTIONAL';
     
 
 AffectsLevel:
