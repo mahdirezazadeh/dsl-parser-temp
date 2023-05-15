@@ -12,10 +12,28 @@ Include:
 	'import' importURI=STRING;
  
 BaseInfo:
-    Profile | Subject | Questionnaire | QualityAttribute | Metric;
+    Profile | Subject | Questionnaire | QualityAttribute | Metric | Level;
 	
 Profile:
-    'Profile' name=ID;
+    'Profile' name=ID '{'
+    ('title:' title=STRING)
+    levels+=Level*
+    '}';
+    
+    
+Level:
+    'Level' name=ID '{'
+    ('title:' title=STRING)? (',')?
+    (competence+=Competence (',' competence+=Competence)*)?
+    '}';
+    
+Competence:
+    'competence:' '[' 
+    competenceValues+=CompetenceValue (',' competenceValues+=CompetenceValue)* 
+    ']';
+    
+CompetenceValue:
+    level=[Level] ':' value=INT '%';
 
 Subject:
     'Subject' name=ID '{'
@@ -38,23 +56,19 @@ QualityAttribute:
     ('description:' description=STRING)
     ('index:' index=INT)?
     'subject:' subject=[Subject]
+    ('weight' weight=INT)? 
     '}';
-    
-    
-   
-Level:
-    'WEAK' | 'MODERATE' | 'GOOD' | 'GREAT' | 'EXCEPTIONAL';
-    
+            
 
 AffectsLevel:
-    'affects' level=Level 'level' 'of' qualityAttribute=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')?;
+    'affects' level=[Level] 'level' 'of' qualityAttribute=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')?  ('weight' weight=INT)?;
   
 CustomOption:
-	'options' optionFrom+=INT 'to' optionTo+=INT 'affects' 'on' optionLevel+=Level 'level' 'of' qualityAttribute+=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')*
+	'options' optionFrom+=INT 'to' optionTo+=INT 'affects' 'on' optionLevel+=[Level] 'level' 'of' qualityAttribute+=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')* ('weight' weight=INT)?
 ; 
 
 NecessaryCondition:
-	'option' necessaryOption+=INT 'is' 'necessary' 'for'  necessaryLevel+=Level 'level' 'of' qualityAttribute+=[QualityAttribute]
+	'option' necessaryOption+=INT 'is' 'necessary' 'for'  necessaryLevel+=[Level] 'level' 'of' qualityAttribute+=[QualityAttribute]
 	
 ;
 
