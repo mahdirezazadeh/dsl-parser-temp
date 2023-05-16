@@ -38,6 +38,7 @@ CompetenceValue:
 Subject:
     'Subject' name=ID '{'
     ('title:' title=STRING)
+    ('code:' code=STRING)?
     ('description:' description=STRING)
     ('index:' index=INT)?
     ('questionnaires:' questionnaires+=[Questionnaire] (',' questionnaires+=[Questionnaire])*)?
@@ -46,6 +47,7 @@ Subject:
 Questionnaire:
     'Questionnaire' name=ID '{'
     ('title:' title=STRING)
+    ('code:' code=STRING)?
     ('description:' description=STRING)
     ('index:' index=INT)?
     '}';
@@ -54,6 +56,7 @@ QualityAttribute:
     'QualityAttribute' name=ID '{'
     ('title:' title=STRING)
     ('description:' description=STRING)
+    ('code:' code=STRING)?
     ('index:' index=INT)?
     'subject:' subject=[Subject]
     ('weight' weight=INT)? 
