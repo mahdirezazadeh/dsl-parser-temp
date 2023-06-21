@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.flickit.dsl.editor
+Bundle-ManifestVersion: 2
+Bundle-Name: org.flickit.dsl.editor
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.flickit.dsl.editor; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.flickit.dsl.editor.assessmentKitDsl.util,
+ org.flickit.dsl.editor.serializer,
+ org.flickit.dsl.editor.parser.antlr.internal,
+ org.flickit.dsl.editor.parser.antlr,
+ org.flickit.dsl.editor.assessmentKitDsl,
+ org.flickit.dsl.editor.assessmentKitDsl.impl,
+ org.flickit.dsl.editor.services,
+ org.flickit.dsl.editor.validation,
+ org.flickit.dsl.editor.generator,
+ org.flickit.dsl.editor,
+ org.flickit.dsl.editor.scoping
+Import-Package: org.apache.log4j
