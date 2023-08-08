@@ -29,18 +29,7 @@ jobs:
           java-version: 11
           distribution: adopt
 
-      - name: Extract Maven project version
-        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
-        id: project
-
-      - name: Check output
-        env:
-          RELEASE_VERSION: ${{ steps.project.outputs.version }}
-        run: |
-          echo $RELEASE_VERSION
-
       - name: Build with Maven
-        if: endsWith(steps.project.outputs.version, 'SNAPSHOT') == true
         run: mvn clean package
 
   deploy-snapshot-package:
