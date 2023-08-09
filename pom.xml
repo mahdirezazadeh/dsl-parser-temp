@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.flickit.dsl.editor</groupId>
-	<version>0.4.0</version>
+	<version>0.5.0-SNAPSHOT</version>
 	<artifactId>org.flickit.dsl.editor.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -317,4 +317,12 @@
 
 	<dependencies>
 	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/avansoft/flickit-dsl-editor</url>
+		</repository>
+	</distributionManagement>
 </project>
