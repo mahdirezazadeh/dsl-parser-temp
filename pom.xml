@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.flickit.dsl.editor</groupId>
+	<groupId>org.flickit.dsl.editor.v2</groupId>
 	<version>0.5.0-SNAPSHOT</version>
-	<artifactId>org.flickit.dsl.editor.parent</artifactId>
+	<artifactId>org.flickit.dsl.editor.v2.parent</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
-		<xtextVersion>2.28.0</xtextVersion>
-		<mwe2Version>2.13.0</mwe2Version>
+		<xtextVersion>2.31.0</xtextVersion>
+		<mwe2Version>2.14.0</mwe2Version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<!-- Tycho settings -->
-		<tycho-version>2.7.4</tycho-version>
+		<tycho-version>2.7.5</tycho-version>
 		<!-- Define overridable properties for tycho-surefire-plugin -->
 		<platformSystemProperties></platformSystemProperties>
 		<moduleProperties></moduleProperties>
@@ -21,12 +21,12 @@
 		<additionalTestArguments></additionalTestArguments>
 	</properties>
 	<modules>
-		<module>org.flickit.dsl.editor</module>
-		<module>org.flickit.dsl.editor.ide</module>
-		<module>org.flickit.dsl.editor.ui</module>
-		<module>org.flickit.dsl.editor.target</module>
-		<!-- <module>org.flickit.dsl.editor.tests</module> -->
-		<module>org.flickit.dsl.editor.ui.tests</module>
+		<module>org.flickit.dsl.editor.v2</module>
+		<module>org.flickit.dsl.editor.v2.ide</module>
+		<module>org.flickit.dsl.editor.v2.ui</module>
+		<module>org.flickit.dsl.editor.v2.target</module>
+		<module>org.flickit.dsl.editor.v2.tests</module>
+		<module>org.flickit.dsl.editor.v2.ui.tests</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -62,8 +62,8 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>org.flickit.dsl.editor</groupId>
-							<artifactId>org.flickit.dsl.editor.target</artifactId>
+							<groupId>org.flickit.dsl.editor.v2</groupId>
+							<artifactId>org.flickit.dsl.editor.v2.target</artifactId>
 							<version>${project.version}</version>
 						</artifact>
 					</target>
@@ -89,7 +89,7 @@
 							<requirement>
 								<type>eclipse-plugin</type>
 								<id>org.eclipse.xtext.logging</id>
-								<versionRange>1.2.19</versionRange>
+								<versionRange>1.2.24</versionRange>
 							</requirement>
 							<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
 								platform is Luna or later. (backward compatible with kepler and previous

@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.flickit.dsl.editor.v2.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: org.flickit.dsl.editor.v2.ui
+Bundle-Vendor: My Company
+Bundle-Version: 0.5.0.qualifier
+Bundle-SymbolicName: org.flickit.dsl.editor.v2.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.flickit.dsl.editor.v2,
+ org.flickit.dsl.editor.v2.ide,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.14.300",
+ org.eclipse.ui.ide;bundle-version="3.18.500",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: org.flickit.dsl.editor.v2.ui.quickfix,
+ org.flickit.dsl.editor.v2.ui.contentassist,
+ org.flickit.dsl.editor.v2.ui.internal
+Bundle-Activator: org.flickit.dsl.editor.v2.ui.internal.V2Activator
