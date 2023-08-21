@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.flickit.dsl.editor.v2</groupId>
+	<groupId>org.flickit.dsl.editor</groupId>
 	<version>0.5.0-SNAPSHOT</version>
 	<artifactId>org.flickit.dsl.editor.v2.parent</artifactId>
 	<packaging>pom</packaging>
@@ -62,7 +62,7 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>org.flickit.dsl.editor.v2</groupId>
+							<groupId>org.flickit.dsl.editor</groupId>
 							<artifactId>org.flickit.dsl.editor.v2.target</artifactId>
 							<version>${project.version}</version>
 						</artifact>
