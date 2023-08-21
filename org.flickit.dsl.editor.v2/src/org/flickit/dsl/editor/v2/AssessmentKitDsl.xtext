@@ -7,88 +7,81 @@ generate assessmentKitDsl "http://www.flickit.org/dsl/editor/v2/AssessmentKitDsl
 Root:
 	includes+=Include*
     (elements+=BaseInfo)*;
-    
+
 Include:
 	'import' importURI=STRING;
  
 BaseInfo:
-    AssessmentKit | Subject | Questionnaire | QualityAttribute | Question | Level;
-	
+    AssessmentKit | Subject | Questionnaire | Attribute | Question | Level;
+
 AssessmentKit:
-    'AssessmentKit' name=ID '{'
+    'kit' name=ID '{'
     ('title:' title=STRING)
     levels+=Level*
     '}';
-    
-    
+
 Level:
-    'Level' name=ID '{'
-    ('title:' title=STRING)? (',')?
+    'level' name=ID '{'
+    ('title:' title=STRING)?
+    ('index:' index=INT)?
     (competence+=Competence (',' competence+=Competence)*)?
     '}';
-    
+
 Competence:
     'competence:' '[' 
     competenceValues+=CompetenceValue (',' competenceValues+=CompetenceValue)* 
     ']';
-    
+
 CompetenceValue:
     level=[Level] ':' value=INT '%';
 
 Subject:
-    'Subject' name=ID '{'
+    'subject' name=ID '{'
     ('title:' title=STRING)
-    ('code:' code=STRING)?
-    ('description:' description=STRING)
+    ('description:' description=STRING)?
     ('index:' index=INT)?
-    ('questionnaires:' questionnaires+=[Questionnaire] (',' questionnaires+=[Questionnaire])*)?
+    ('weight:' weight=INT)?
     '}';
 
 Questionnaire:
-    'Questionnaire' name=ID '{'
+    'questionnaire' name=ID '{'
     ('title:' title=STRING)
-    ('code:' code=STRING)?
-    ('description:' description=STRING)
+    ('description:' description=STRING)?
     ('index:' index=INT)?
     '}';
 
-QualityAttribute:
-    'QualityAttribute' name=ID '{'
+Attribute:
+    'attribute' name=ID '{'
     ('title:' title=STRING)
-    ('description:' description=STRING)
-    ('code:' code=STRING)?
+    ('description:' description=STRING)?
     ('index:' index=INT)?
-    'subject:' subject=[Subject]
-    ('weight' weight=INT)? 
+    ('subject:' subject=[Subject])
+    ('weight:' weight=INT)?
     '}';
-            
 
-AffectsLevel:
-    'affects' level=[Level] 'level' 'of' qualityAttribute=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')?  ('weight' weight=INT)?;
-  
-CustomOption:
-	'options' optionFrom+=INT 'to' optionTo+=INT 'affects' 'on' optionLevel+=[Level] 'level' 'of' qualityAttribute+=[QualityAttribute] ('with' 'values' '{' values+=FLOAT (',' values+=FLOAT)* '}')* ('weight' weight=INT)?
-; 
+Question:
+    'question' name=ID '{'
+    'questionnaire:' questionnaire=[Questionnaire]
+    ('guide:' guide=STRING)?
+    'title:' title=STRING
+    'options:' options+=STRING (',' options+=STRING)*
+    (affectsAttribute+=AffectsAttribute)*
+    ('mayNotBeApplicable:' mayNotBeApplicable=MayNotBeApplicable)?
+     '}';
 
-NecessaryCondition:
-	'option' necessaryOption+=INT 'is' 'necessary' 'for'  necessaryLevel+=[Level] 'level' 'of' qualityAttribute+=[QualityAttribute]
-	
-;
+AffectsAttribute :
+	'affects' attribute=[Attribute]
+		onLevel+=OnLevel
+		(onLevel+=OnLevel)*;
+
+OnLevel :
+	'on' 'level' level=[Level] ('with' 'values' '[' values+=Value (',' values+=Value)* ']')? ('with' 'weight' weight=INT)?;
 
 FLOAT:
 	INT '.' INT;
-	
+
+Value:
+	INT | FLOAT;
+
 MayNotBeApplicable:
     'true' | 'false';
-
-Question:
-    'Question' name=ID '{'
-    'questionnaire:' questionnaire=[Questionnaire]
-    ('description:' description=STRING)?
-    'title:' question=STRING
-    'options:' options+=STRING (',' options+=STRING)*
-    (affects+=AffectsLevel)*
-    (customOptions+=CustomOption)*
-    (necessaryCondition+=NecessaryCondition)*
-    ('mayNotBeApplicable:' mayNotBeApplicable=MayNotBeApplicable)?
-     '}';
