@@ -22,8 +22,8 @@ AssessmentKit:
 
 Level:
     'level' name=ID '{'
-    ('title:' title=STRING)?
-    ('index:' index=INT)?
+    ('title:' title=STRING)
+    ('index:' index=INT)
     (competence+=Competence (',' competence+=Competence)*)?
     '}';
 
@@ -38,7 +38,7 @@ CompetenceValue:
 Subject:
     'subject' name=ID '{'
     ('title:' title=STRING)
-    ('description:' description=STRING)?
+    ('description:' description=STRING)
     ('index:' index=INT)?
     ('weight:' weight=INT)?
     '}';
@@ -46,14 +46,14 @@ Subject:
 Questionnaire:
     'questionnaire' name=ID '{'
     ('title:' title=STRING)
-    ('description:' description=STRING)?
+    ('description:' description=STRING)
     ('index:' index=INT)?
     '}';
 
 Attribute:
     'attribute' name=ID '{'
     ('title:' title=STRING)
-    ('description:' description=STRING)?
+    ('description:' description=STRING)
     ('index:' index=INT)?
     ('subject:' subject=[Subject])
     ('weight:' weight=INT)?
@@ -65,7 +65,7 @@ Question:
     ('guide:' guide=STRING)?
     'title:' title=STRING
     'options:' options+=STRING (',' options+=STRING)*
-    (affectsAttribute+=AffectsAttribute)*
+    (affectsAttribute+=AffectsAttribute)+
     ('mayNotBeApplicable:' mayNotBeApplicable=MayNotBeApplicable)?
      '}';
 
