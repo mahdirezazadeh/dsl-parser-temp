@@ -34,3 +34,8 @@ mvnw.cmd
 *.tmp
 *.bak
 *.swp
+
+# Site Update
+org.flickit.dsl.editor.v2.update/features/
+org.flickit.dsl.editor.v2.update/plugins/
+org.flickit.dsl.editor.v2.update/*.jar
