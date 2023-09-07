@@ -15,7 +15,6 @@ xtend-gen/
 # Xtext generated files
 .idea/
 .project
-.classpath
 .settings/
 .metamodel/
 src-gen/
