@@ -62,7 +62,7 @@ Attribute:
 Question:
     'question' name=ID '{'
     'questionnaire:' questionnaire=[Questionnaire]
-    ('guide:' guide=STRING)?
+    ('hint:' hint=STRING)?
     'title:' title=STRING
     'options:' options+=STRING (',' options+=STRING)*
     (affectsAttribute+=AffectsAttribute)+
