@@ -2,7 +2,7 @@
 <feature
       id="org.flickit.dsl.editor.v2.feature"
       label="AssessmentKitDsl Editor Feature"
-      version="2.1.0">
+      version="2.1.1">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

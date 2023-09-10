@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.flickit.dsl.editor.v2.feature_2.1.0.jar" id="org.flickit.dsl.editor.v2.feature" version="2.1.0">
+   <feature url="features/org.flickit.dsl.editor.v2.feature_2.1.1.jar" id="org.flickit.dsl.editor.v2.feature" version="2.1.1">
       <category name="editor"/>
    </feature>
    <category-def name="editor" label="editor"/>
