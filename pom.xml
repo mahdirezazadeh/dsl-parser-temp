@@ -25,6 +25,8 @@
 		<module>org.flickit.dsl.editor.v2.ide</module>
 		<module>org.flickit.dsl.editor.v2.ui</module>
 		<module>org.flickit.dsl.editor.v2.target</module>
+		<module>org.flickit.dsl.editor.v2.feature</module>
+		<module>org.flickit.dsl.editor.v2.repository</module>
 		<module>org.flickit.dsl.editor.v2.tests</module>
 		<module>org.flickit.dsl.editor.v2.ui.tests</module>
 	</modules>
