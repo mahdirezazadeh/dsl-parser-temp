@@ -109,8 +109,8 @@ jobs:
       - name: Archive files
         if: endsWith(steps.project.outputs.version, 'SNAPSHOT') == true
         run:
-          cp ./org.flickit.dsl.editor.v2.repository/category.xml ./org.flickit.dsl.editor.v2.repository/target/repository/
-          cd ./org.flickit.dsl.editor.v2.repository/target/repository/
+          cp ./org.flickit.dsl.editor.v2.repository/category.xml ./org.flickit.dsl.editor.v2.repository/target/repository/ &&
+          cd ./org.flickit.dsl.editor.v2.repository/target/repository/ &&
           zip -r update-${{ steps.project.outputs.version }}.zip features plugins artifacts.jar content.jar category.xml
 
       - name: Upload archive
