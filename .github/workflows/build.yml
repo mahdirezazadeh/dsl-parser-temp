@@ -76,6 +76,8 @@ jobs:
   deploy-snapshot-update-site:
     name: deploy snapshot update site
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -118,33 +120,8 @@ jobs:
         with:
           artifacts: update-${{ steps.project.outputs.version }}.zip
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
+          tag: ${{ steps.project.outputs.version }}
 
-
-  #
-#      - name: Upload archive
-#        if: endsWith(steps.project.outputs.version, 'SNAPSHOT') == true
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: update-${{ steps.project.outputs.version }}
-#          path: ./org.flickit.dsl.editor.v2.repository/target/repository/update-${{ steps.project.outputs.version }}.zip
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-#
-#      - name: Publish to GitHub Packages
-#        run: |
-#          cd ./org.flickit.dsl.editor.v2.repository/target/repository/
-#          echo "Publishing package..."
-#          echo "version=${RELEASE_VERSION}" >> package-metadata.properties
-#          echo "group=mahdirezazadeh" >> package-metadata.properties
-#          echo "file=update-${RELEASE_VERSION}.zip" >> package-metadata.properties
-#
-#          # Use GitHub token to authenticate for GitHub Packages
-#          echo ${{ secrets.GH_PACKAGES_TOKEN }} | gh auth login --with-token
-#
-#          # Publish the ZIP file to GitHub Packages
-#          gh package publish . --title "update" --package-type zip
-#        env:
-#          RELEASE_VERSION: ${{ steps.project.outputs.version }}
 
   build-deploy-package:
     needs: [build]
