@@ -123,19 +123,19 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
+          cd ./org.flickit.dsl.editor.v2.repository/target/repository/
           echo "Publishing package..."
-          echo "version=${RELEASE_VERSION}" >> gradle.properties
-          echo "group=org-flickit-dsl-editor" >> gradle.properties
-          echo "file=update-${RELEASE_VERSION}.zip" >> gradle.properties
-          echo "repository=mahdirezazadeh" >> gradle.properties
-
-          echo "$GH_PAT" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
-          docker build -t org-flickit-dsl-editor/update-package:${RELEASE_VERSION} .
-          docker tag org-flickit-dsl-editor/update-package:${RELEASE_VERSION} ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
-          docker push ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
+          echo "version=${RELEASE_VERSION}" >> package-metadata.properties
+          echo "group=mahdirezazadeh" >> package-metadata.properties
+          echo "file=update-${RELEASE_VERSION}.zip" >> package-metadata.properties
+          
+          # Use GitHub token to authenticate for GitHub Packages
+          echo ${{ secrets.GH_PACKAGES_TOKEN }} | gh auth login --with-token
+          
+          # Publish the ZIP file to GitHub Packages
+          gh package publish . --title "update" --package-type zip
         env:
-          RELEASE_VERSION: ${{ steps.deploy-snapshot-update-site.outputs.version }}
-          GH_PAT: ${{ secrets.GH_PACKAGES_TOKEN }}
+          RELEASE_VERSION: ${{ steps.project.outputs.version }}
 
   build-deploy-package:
     needs: [build]
