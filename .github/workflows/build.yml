@@ -74,7 +74,6 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }}
 
   deploy-snapshot-update-site:
-    needs: [ build ]
     name: deploy snapshot update site
     runs-on: ubuntu-latest
 
@@ -121,6 +120,22 @@ jobs:
           path: ./org.flickit.dsl.editor.v2.repository/target/repository/update-${{ steps.project.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: |
+          echo "Publishing package..."
+          echo "version=${RELEASE_VERSION}" >> gradle.properties
+          echo "group=org.flickit.dsl.editor" >> gradle.properties
+          echo "file=update-${RELEASE_VERSION}.zip" >> gradle.properties
+          echo "repository=mahdirezazadeh" >> gradle.properties
+
+          echo "$GH_PAT" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+          docker build -t org.flickit.dsl.editor/update-package:${RELEASE_VERSION} .
+          docker tag org.flickit.dsl.editor/update-package:${RELEASE_VERSION} ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
+          docker push ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
+        env:
+          RELEASE_VERSION: ${{ steps.deploy-snapshot-update-site.outputs.version }}
+          GH_PAT: ${{ secrets.GH_PACKAGES_TOKEN }}
 
   build-deploy-package:
     needs: [build]
