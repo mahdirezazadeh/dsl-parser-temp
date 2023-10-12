@@ -125,13 +125,13 @@ jobs:
         run: |
           echo "Publishing package..."
           echo "version=${RELEASE_VERSION}" >> gradle.properties
-          echo "group=org.flickit.dsl.editor" >> gradle.properties
+          echo "group=org-flickit-dsl-editor" >> gradle.properties
           echo "file=update-${RELEASE_VERSION}.zip" >> gradle.properties
           echo "repository=mahdirezazadeh" >> gradle.properties
 
           echo "$GH_PAT" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
-          docker build -t org.flickit.dsl.editor/update-package:${RELEASE_VERSION} .
-          docker tag org.flickit.dsl.editor/update-package:${RELEASE_VERSION} ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
+          docker build -t org-flickit-dsl-editor/update-package:${RELEASE_VERSION} .
+          docker tag org-flickit-dsl-editor/update-package:${RELEASE_VERSION} ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
           docker push ghcr.io/mahdirezazadeh/update-package:${RELEASE_VERSION}
         env:
           RELEASE_VERSION: ${{ steps.deploy-snapshot-update-site.outputs.version }}
