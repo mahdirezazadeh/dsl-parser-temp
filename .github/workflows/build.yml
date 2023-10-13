@@ -121,6 +121,7 @@ jobs:
           artifacts: update-${{ steps.project.outputs.version }}.zip
           token: ${{ secrets.GH_PACKAGES_TOKEN }}
           tag: ${{ steps.project.outputs.version }}
+          allowUpdates: true
 
 
   build-deploy-package:
