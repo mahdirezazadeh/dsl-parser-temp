@@ -102,10 +102,6 @@ jobs:
       - name: Verify with Maven
         if: endsWith(steps.project.outputs.version, 'SNAPSHOT') == true
         run: mvn clean verify
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-          MAVEN_USERNAME: ${{ env.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Archive files
         if: endsWith(steps.project.outputs.version, 'SNAPSHOT') == true
