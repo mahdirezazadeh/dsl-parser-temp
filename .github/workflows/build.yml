@@ -215,7 +215,7 @@ jobs:
           echo "${UPDATE}" > README.md
 
       - name: Commit readme file changes
-      - uses: devops-infra/action-commit-push@master
+        uses: devops-infra/action-commit-push@master
         with:
           github_token: "${{ secrets.GH_PACKAGES_TOKEN }}"
           commit_message: "Update update-site download link on README.me file"
