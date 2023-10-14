@@ -157,6 +157,8 @@ jobs:
 #    needs: [ build ]
     name: upload update site
     runs-on: ubuntu-latest
+    permissions:
+      write-all
 #    if: ${{ (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) }}
 
     steps:
