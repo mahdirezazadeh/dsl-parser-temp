@@ -215,3 +215,4 @@ jobs:
           message: "docs(readme): Bump update site download button version to v${{ steps.project.outputs.version }}"
           default_author: github_actor
           branch: main
+          github_token: ${{ secrets.GH_PACKAGES_TOKEN }}
